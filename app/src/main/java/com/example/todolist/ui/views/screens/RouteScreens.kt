@@ -11,9 +11,9 @@ sealed class  AuthRouteScreens(val path: String){
 }
 
 sealed class StartRouteScreens(val path: String) {
-    data object StartScreen: StartRouteScreens("start")
+    data object StartScreens: StartRouteScreens("start")
 }
 
 sealed class MainRouteScreens(val path: String) {
-    data object  HomeScreens: AuthRouteScreens("home")
+    data object  HomeScreens: MainRouteScreens("home")
 }

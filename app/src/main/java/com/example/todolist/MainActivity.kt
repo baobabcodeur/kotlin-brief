@@ -30,7 +30,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -39,6 +38,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.todolist.data.room.database.Graph
 import com.example.todolist.ui.theme.TodoListTheme
+
+
 import com.example.todolist.ui.views.screens.AuthRouteScreens
 import com.example.todolist.ui.views.screens.Navigation
 import com.example.todolist.ui.views.screens.StartRouteScreens
@@ -47,9 +48,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       Graph.provide(this)
+        Graph.provide(this)
         enableEdgeToEdge()
-        setContent{
+        setContent {
             TodoListTheme {
                 Navigation()
             }
@@ -57,19 +58,17 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
 @Composable
 fun Start(navController: NavController) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
-            .padding(dimensionResource(id = R.dimen.start_content_width))
+            .padding(dimensionResource(id = R.dimen.size_4))
             .verticalScroll(rememberScrollState())
-    ){
-        Column (
-            modifier = Modifier
-                .width(dimensionResource(id = R.dimen.start_content_width)),
+    ) {
+        Column(
+            modifier = Modifier.width(dimensionResource(id = R.dimen.start_content_width)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.size_4))
         ) {
             Text(
@@ -80,7 +79,8 @@ fun Start(navController: NavController) {
                     .fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.size_4)))
+
+            Spacer(modifier = Modifier.height((dimensionResource(id = R.dimen.size_2))))
 
             Row(
                 modifier = Modifier
@@ -91,8 +91,7 @@ fun Start(navController: NavController) {
                     painter = painterResource(id = R.drawable.boost_color),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(dimensionResource(id = R.dimen.start_icon_size))
-
+                        .size(dimensionResource(id = R.dimen.start_icon_size)),
                 )
                 Column(
                     modifier = Modifier
@@ -105,39 +104,17 @@ fun Start(navController: NavController) {
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
                         softWrap = true,
-                        maxLines = integerResource(id = R.integer.max_line_2)
+                        maxLines = integerResource(id = R.integer.max_line_1)
                     )
-                }
 
-            }
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.size_4))
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.boost_color),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(dimensionResource(id = R.dimen.start_icon_size))
-
-                )
-                Column(
-                    modifier = Modifier
-                        .weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.dp_2))
-                ) {
                     Text(
-                        text = stringResource(id = R.string.boost_productivity),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
+                        text = stringResource(id = R.string.boost_productivity_description),
+                        style = MaterialTheme.typography.bodySmall,
                         overflow = TextOverflow.Ellipsis,
                         softWrap = true,
                         maxLines = integerResource(id = R.integer.max_line_2)
                     )
                 }
-
             }
 
             Row(
@@ -149,8 +126,7 @@ fun Start(navController: NavController) {
                     painter = painterResource(id = R.drawable.check_color),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(dimensionResource(id = R.dimen.start_icon_size))
-
+                        .size(dimensionResource(id = R.dimen.start_icon_size)),
                 )
                 Column(
                     modifier = Modifier
@@ -165,17 +141,15 @@ fun Start(navController: NavController) {
                         softWrap = true,
                         maxLines = integerResource(id = R.integer.max_line_1)
                     )
+
                     Text(
                         text = stringResource(id = R.string.availability_description),
                         style = MaterialTheme.typography.bodySmall,
-
                         overflow = TextOverflow.Ellipsis,
                         softWrap = true,
                         maxLines = integerResource(id = R.integer.max_line_2)
                     )
-
                 }
-
             }
 
             Row(
@@ -187,8 +161,7 @@ fun Start(navController: NavController) {
                     painter = painterResource(id = R.drawable.recover_color),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(dimensionResource(id = R.dimen.start_icon_size))
-
+                        .size(dimensionResource(id = R.dimen.start_icon_size)),
                 )
                 Column(
                     modifier = Modifier
@@ -203,17 +176,17 @@ fun Start(navController: NavController) {
                         softWrap = true,
                         maxLines = integerResource(id = R.integer.max_line_1)
                     )
+
                     Text(
                         text = stringResource(id = R.string.recovering_system_description),
                         style = MaterialTheme.typography.bodySmall,
-
                         overflow = TextOverflow.Ellipsis,
                         softWrap = true,
                         maxLines = integerResource(id = R.integer.max_line_2)
                     )
                 }
-
             }
+
 
             Row(
                 modifier = Modifier
@@ -224,8 +197,7 @@ fun Start(navController: NavController) {
                     painter = painterResource(id = R.drawable.lock_color),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(dimensionResource(id = R.dimen.start_icon_size))
-
+                        .size(dimensionResource(id = R.dimen.start_icon_size)),
                 )
                 Column(
                     modifier = Modifier
@@ -240,32 +212,32 @@ fun Start(navController: NavController) {
                         softWrap = true,
                         maxLines = integerResource(id = R.integer.max_line_1)
                     )
+
                     Text(
                         text = stringResource(id = R.string.secured_space_description),
                         style = MaterialTheme.typography.bodySmall,
-
                         overflow = TextOverflow.Ellipsis,
                         softWrap = true,
                         maxLines = integerResource(id = R.integer.max_line_2)
                     )
                 }
-
             }
-
         }
+
         Button(
             onClick = {
-            navController.navigate(AuthRouteScreens.RegistrationScreen.path){
-                popUpTo(StartRouteScreens.StartScreen.path){
-                    inclusive = true
+                navController.navigate(AuthRouteScreens.RegistrationScreen.path) {
+                    popUpTo(StartRouteScreens.StartScreens.path) {
+                        inclusive = true
+                    }
                 }
-            }
             },
             shape = RoundedCornerShape(dimensionResource(id = R.dimen.size_3)),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
         ) {
+
             Text(
                 text = stringResource(id = R.string.lunch_app),
                 fontWeight = FontWeight.Bold
@@ -274,8 +246,10 @@ fun Start(navController: NavController) {
     }
 }
 
-@Preview(showBackground = true,
-    showSystemUi = true)
+@Preview(
+    showBackground = true,
+    showSystemUi = true
+)
 @Composable
 fun GreetingPreview() {
     TodoListTheme {

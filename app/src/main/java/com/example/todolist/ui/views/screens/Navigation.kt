@@ -8,17 +8,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.todolist.Start
+import com.example.todolist.ui.views.screen.authentication.Registration
 import com.example.todolist.ui.views.screens.authentication.ForgottenPassword
 import com.example.todolist.ui.views.screens.authentication.NewPassword
 import com.example.todolist.ui.views.screens.authentication.OTPCode
-import com.example.todolist.ui.views.screens.authentication.Registration
 import com.example.todolist.ui.views.screens.authentication.SignIn
 import com.example.todolist.ui.views.screens.user.Home
 
 
 @Composable
 fun Navigation(
-    startDestination: String = StartRouteScreens.StartScreen.path
+    startDestination: String = StartRouteScreens.StartScreens.path
 ) {
     val navController = rememberNavController()
 
@@ -26,7 +26,7 @@ fun Navigation(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(route = StartRouteScreens.StartScreen.path) {
+        composable(route = StartRouteScreens.StartScreens.path) {
             Start(navController = navController)
         }
         composable(route = AuthRouteScreens.RegistrationScreen.path) {

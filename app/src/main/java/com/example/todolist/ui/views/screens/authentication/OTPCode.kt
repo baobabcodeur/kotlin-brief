@@ -99,16 +99,16 @@ fun OTPCode(navController: NavController, email: String = ""){
                         text =  stringResource(id = R.string.otp_code_text),
                         color = MaterialTheme.colorScheme.onBackground,
                         style = MaterialTheme.typography.bodyMedium,
-                       
+
                     )
-                    
+
                     Column (
                         modifier = Modifier
                             .fillMaxWidth(),
                         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.size_3))
-                        
+
                     ) {
-                        
+
                         DefaultTextField(
                             value = code,
                             onValueChange = { code = it },
@@ -116,7 +116,7 @@ fun OTPCode(navController: NavController, email: String = ""){
                             errorText = isCodeErrorText,
                             label = stringResource(id = R.string.otp_code),
                             placeholder = stringResource(id = R.string.otp_code_placeholder)
-                            
+
                         )
                     }
                     Button(
@@ -130,11 +130,11 @@ fun OTPCode(navController: NavController, email: String = ""){
                                 isCodeErrorText = context.getString(R.string.otp_code_error_text)
                                 isLoading = false
                             } else {
-                                
-                                authViewModel.activateUserByEmail(email = email)
-                                
+
+                               // authViewModel.activateUserByEmail(email = email)
+
                                 navController.navigate(MainRouteScreens.HomeScreens.path) {
-                                    popUpTo(StartRouteScreens.StartScreen.path){
+                                    popUpTo(StartRouteScreens.StartScreens.path){
                                         inclusive = true
                                     }
 
@@ -151,10 +151,10 @@ fun OTPCode(navController: NavController, email: String = ""){
                         shape = RoundedCornerShape(dimensionResource(id = R.dimen.size_3)),
                         modifier = Modifier
                             .fillMaxWidth(),
-                        
+
                     ) {
                         Text(text = if(isLoading) stringResource(id = R.string.loading) else stringResource(id = R.string.submit))
-                        
+
                     }
 
 

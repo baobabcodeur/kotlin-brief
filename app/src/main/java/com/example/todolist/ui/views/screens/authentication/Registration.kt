@@ -1,4 +1,4 @@
-package com.example.todolist.ui.views.screens.authentication
+package com.example.todolist.ui.views.screen.authentication
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,6 +39,7 @@ import com.example.todolist.ui.components.DefaultCheckbox
 import com.example.todolist.ui.components.DefaultTextField
 import com.example.todolist.ui.theme.TodoListTheme
 import com.example.todolist.ui.views.layout.BackTopAppBar
+
 import com.example.todolist.ui.views.screens.AuthRouteScreens
 import com.example.todolist.utils.StringConstants
 import com.example.todolist.utils.emailLengthValidation
@@ -48,7 +49,8 @@ import com.example.todolist.viewmodels.AuthViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun Registration(navController: NavController) {
+fun Registration(navController: NavController){
+
     val authViewModel = viewModel(modelClass = AuthViewModel::class.java)
     val authState = authViewModel.state
 
@@ -67,16 +69,16 @@ fun Registration(navController: NavController) {
     var passwordConfirm by rememberSaveable {
         mutableStateOf("")
     }
-    var isFullNameError by rememberSaveable {
+    var isFulNameError by rememberSaveable {
         mutableStateOf(false)
     }
-    var isFullNameErrorText by rememberSaveable {
+    var isFulNameErrorText by rememberSaveable {
         mutableStateOf("")
     }
     var isEmailError by rememberSaveable {
         mutableStateOf(false)
     }
-    var isEmailErrorText by rememberSaveable {
+    var isEmailErrortext by rememberSaveable {
         mutableStateOf("")
     }
     var isPasswordError by rememberSaveable {
@@ -97,15 +99,14 @@ fun Registration(navController: NavController) {
             topBar = {
                 BackTopAppBar(navController = navController)
             }
-        ) { innerPadding ->
+        ){ innerPadding ->
             Column (
                 modifier = Modifier
                     .padding(innerPadding)
                     .fillMaxSize()
-            ) {
+            ){
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.size_4)))
-
-                Column (
+                Column(
                     verticalArrangement = Arrangement.spacedBy(
                         space = dimensionResource(id = R.dimen.size_4)
                     ),
@@ -114,7 +115,8 @@ fun Registration(navController: NavController) {
                         .fillMaxSize()
                         .padding(horizontal = dimensionResource(id = R.dimen.size_8))
                         .verticalScroll(rememberScrollState())
-                ){
+                ) {
+
                     Text(
                         text = stringResource(id = R.string.registration),
                         color = MaterialTheme.colorScheme.onBackground,
@@ -125,44 +127,50 @@ fun Registration(navController: NavController) {
                         text = stringResource(id = R.string.registration_text),
                         color = MaterialTheme.colorScheme.onBackground,
                         style = MaterialTheme.typography.bodyMedium,
-
                     )
-                    Column (
+
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth(),
                         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.size_3))
                     ) {
+
                         DefaultTextField(
                             value = fullName,
-                            onValueChange = { fullName = it },
-                            isError = isFullNameError,
-                            errorText = isFullNameErrorText,
-                            label = stringResource(id = R.string.full_name_placeholder),
+                            onValueChange = { fullName = it},
+                            isError = isFulNameError,
+                            errorText = isFulNameErrorText,
+                            label = stringResource(id = R.string.full_name),
                             placeholder = stringResource(id = R.string.full_name_placeholder)
+
                         )
                         DefaultTextField(
-                            value = email ,
-                            onValueChange = { email = it },
+                            value = email,
+                            onValueChange = { email = it},
                             isError = isEmailError,
-                            errorText = isEmailErrorText,
+                            errorText = isEmailErrortext,
                             label = stringResource(id = R.string.email),
                             placeholder = stringResource(id = R.string.email_placeholder)
+
                         )
                         DefaultTextField(
-                            value = password ,
-                            onValueChange = { password = it },
+                            value = password,
+                            onValueChange = { password = it},
                             isError = isPasswordError,
                             errorText = isPasswordErrorText,
-                            label = stringResource(id = R.string.password_placeholder)
+                            label = stringResource(id = R.string.password),
+                            placeholder = stringResource(id = R.string.password_placeholder)
+
                         )
                         DefaultTextField(
-                            value = passwordConfirm ,
-                            onValueChange = { passwordConfirm = it },
-
+                            value = passwordConfirm,
+                            onValueChange = { passwordConfirm = it},
                             label = stringResource(id = R.string.confirm_password),
                             placeholder = stringResource(id = R.string.confirm_password_placeholder)
+
                         )
                     }
+
                     DefaultCheckbox(
                         label = stringResource(id = R.string.i_accept_terms),
                         isChecked = isTermsAccepted,
@@ -170,87 +178,89 @@ fun Registration(navController: NavController) {
                             isTermsAccepted = it
                         },
                     )
-                    Button(onClick = {
-                        var isError = false
-                        if (!fullNameLengthValidation(fullName)) {
-                            isFullNameError = true
-                            isFullNameErrorText = context.getString(R.string.otp_code_error_text)
-                            isError = true
-                        } else {
-                            isFullNameError = false
-                            isFullNameErrorText = ""
-                        }
 
-                        if (!emailLengthValidation(email)) {
-                            isEmailError = true
-                            isEmailErrorText = context.getString(R.string.email_error_text)
-                            isError = true
-                        } else {
-                            isEmailError = false
-                            isEmailErrorText = ""
-                        }
-                        if (!passwordLengthValidation(password)){
-                            isPasswordError = true
-                            isPasswordErrorText = context.getString(R.string.password_error_text)
-                            isError = true
+                    Button(
+                        onClick = {
+                            var isError = false
 
-                        } else if (password != passwordConfirm) {
-                            isPasswordError = true
-                            isPasswordErrorText = context.getString(R.string.password_confirm_error_text)
-                            isError = true
+                            if (!fullNameLengthValidation(fullName)){
+                                isFulNameError = true
+                                isFulNameErrorText = context.getString(R.string.full_name_error_text)
+                                isError = true
+                            }else{
+                                isFulNameError = false
+                                isFulNameErrorText = ""
+                            }
+                            if (!emailLengthValidation(email)){
+                                isEmailError = true
+                                isEmailErrortext = context.getString(R.string.email_error_text)
+                                isError = true
+                            }else{
+                                isEmailError= false
+                                isEmailErrortext = ""
+                            }
+                            if (!passwordLengthValidation(password)){
+                                isPasswordError = true
+                                isPasswordErrorText = context.getString(R.string.password_error_text)
+                                isError = true
+                            }else if(password != passwordConfirm){
+                                isPasswordError = true
+                                isPasswordErrorText = context.getString(R.string.password_confirm_error_text)
+                                isError = true
+                            }else{
+                                isPasswordError = false
+                                isPasswordErrorText = ""
+                            }
+                            if (!isError){
+                                isLoading = true
 
-                        } else {
-                            isPasswordError = false
-                            isPasswordErrorText = ""
-                        }
-                        if (!isError) {
-                            isLoading = true
-                            scope.launch {
-                                authViewModel.getUserByEmail(email)
+                                scope.launch {
+                                    authViewModel.getUserByEmail(email)
 
-                                if (!isTermsAccepted) {
-                                    isFullNameError = true
-                                    isFullNameErrorText = context.getString(R.string.email_already_taken)
-                                    isLoading = false
-                                } else {
-                                    if (authState.usersList.isNotEmpty()){
-                                        isEmailError = true
-                                        isEmailErrorText = context.getString(R.string.email_already_taken)
+                                    if (!isTermsAccepted){
+                                        isFulNameError = true
+                                        isFulNameErrorText = context.getString(R.string.accept_terms_and_conditions)
                                         isLoading = false
-                                    } else {
-                                        authViewModel.sendOTPCode(
-                                            com.example.todolist.data.room.models.OTPCode(
-                                                email = email,
-                                                code = StringConstants.DefaultOTPCode.value
+                                    }else{
+                                        if (authState.usersList.isNotEmpty()){
+                                            isEmailError = true
+                                            isEmailErrortext = context.getString(R.string.email_already_taken)
+                                            isLoading = false
+                                        }else{
+
+                                            authViewModel.sendOTPCode(
+                                                com.example.todolist.data.room.models.OTPCode(
+                                                    email = email,
+                                                    code = StringConstants.DefaultOTPCode.value
+
+                                                )
                                             )
+                                            authViewModel.register(user = User(
+                                                fullName = fullName,
+                                                email = email,
+                                                password = password
+                                            ))
 
-                                        )
-                                        authViewModel.register(user = User(
-                                            fullName = fullName,
-                                            email = email,
-                                            password = password
-                                        )
-                                        )
-                                        navController.navigate(AuthRouteScreens.OTPCodeScreen.path + "/" + email)
+                                            navController.navigate(AuthRouteScreens.OTPCodeScreen.path +"/" + email )
 
-                                        isLoading= false
+                                            isLoading = false
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                    },
+                        },
                         enabled = !isLoading,
                         shape = RoundedCornerShape(dimensionResource(id = R.dimen.size_3)),
                         modifier = Modifier
                             .fillMaxWidth(),
+
                         ) {
-                        
-                        Text(text = if(isLoading) stringResource(id = R.string.loading) else stringResource(
+                        Text(text = if (isLoading) stringResource(id = R.string.loading) else stringResource(
                             id = R.string.register
                         ))
-
                     }
+
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.size_1))
@@ -258,32 +268,31 @@ fun Registration(navController: NavController) {
                         Text(
                             text = stringResource(id = R.string.already_registred),
                             style = MaterialTheme.typography.bodyMedium
-                        ) 
-                            Text(
-                                text = stringResource(id = R.string.already_registred),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.primary,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier 
-                                    .clickable { 
-                                        navController.navigate(AuthRouteScreens.SignInScreen.path)
-                                    }
-                            )
-                        
+                        )
+                        Text(
+                            text = stringResource(id = R.string.sign_in),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .clickable {
+                                    navController.navigate(AuthRouteScreens.SignInScreen.path)
+                                }
+                        )
+
                     }
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.start_content_width)))
-
                 }
+
             }
-            
+
         }
     }
-
-
 }
+
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun RegistrationPreview() {
+fun RegistrationPreview(){
     TodoListTheme {
         Registration(navController = rememberNavController())
     }
